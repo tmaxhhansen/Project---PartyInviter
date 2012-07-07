@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+   <string name="app_name">Partyinviter</string>
+    
+    <!-- Main strings -->
+    <string name="main_invitation">invite!</string>
+    <string name="main_listshow">List</string>
+    <string name="main_calendar">Calendar</string>
+    
+    <!-- inviter strings -->
+    <string name="inviter_date"> Date </string>
+    <string name="inviter_description"> Description </string>
+    <string name="inviter_dateselect">Select Date</string>
+
+</resources>
