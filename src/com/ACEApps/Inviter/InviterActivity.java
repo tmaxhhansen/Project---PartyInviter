@@ -1,20 +1,25 @@
 package com.ACEApps.Inviter;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import com.ACEApps.DB.SQLiteDAO;
 import com.ACEApps.main.R;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.content.DialogInterface.OnMultiChoiceClickListener;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -50,6 +55,7 @@ public class InviterActivity extends Activity implements OnClickListener {
 	/*** People Picker ***/
 	private int peoplePicker_mselected = -1;
 	private Builder build_alertDialog;
+	private ArrayList<String> aList_name;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -147,6 +153,7 @@ public class InviterActivity extends Activity implements OnClickListener {
 
 
 	/*** Private methods ***/
+	
 	private void hideKeyboard() {
 
 	}
@@ -194,7 +201,8 @@ public class InviterActivity extends Activity implements OnClickListener {
 	    });
 	      build_alertDialog.show();
 	}
-
+	
+	
 	/**
 	 * Name: displayDate()
 	 * Function: display chosen date on the edit box 
@@ -206,4 +214,27 @@ public class InviterActivity extends Activity implements OnClickListener {
 		// Month starts from 0. Need to add 1.
 	}
 	
+	
+	/**
+	 * Name: getNameContact
+	 * Function: retrieve names from the contact list 
+	 */
+	@SuppressLint("ParserError")
+	private String[] getNameContact(){
+		ContentResolver cr = getContentResolver();
+		Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
+		
+		String tempName;
+		String tempId;
+		if(cur.getCount() > 0){
+			int cnt = 1; 
+			while(cur.moveToNext()){
+				
+			}
+		}
+		
+		return null;
+	}
+          
+
 }

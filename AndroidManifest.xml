@@ -29,9 +29,6 @@
         
         <!-- Activities on InviterActivity -->
         <activity 
-            android:name="com.ACEApps.Inviter.Inviter_CalendarActivity"
-            android:theme= "@style/MyTheme"/>
-        <activity 
             android:name="com.ACEApps.Inviter.Inviter_SenderActivity"/>
         
         
