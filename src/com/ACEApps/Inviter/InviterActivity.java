@@ -164,8 +164,15 @@ public class InviterActivity extends Activity implements OnClickListener {
 	 */
 	private void peoplePickerHelper() {
 		
-		String[] array_nameString = new String[getNameContact().size()];
-
+		String [] array_nameString = new String[getNameContact().size()];
+		array_nameString = (String[]) getNameContact().toArray(array_nameString);
+		
+		Log.d("tag", "getNameContact.size()" + getNameContact().size());
+		
+		for(int i = 0; i < getNameContact().size(); i++){
+			Log.d("tag", "in getNameContact = " + array_nameString[i]);
+		}
+		
 		if (array_nameString.length == 0) {
 			String message = null;
 			message = "You have no contact";
@@ -176,13 +183,13 @@ public class InviterActivity extends Activity implements OnClickListener {
 			build_alertDialog.setTitle("Select people to invite");
 			build_alertDialog.setCancelable(true);
 
-			// /TODO: Make a String arrayList to store names from conctacts
 
 			final OnMultiChoiceClickListener onClick = new OnMultiChoiceClickListener() {
 				public void onClick(final DialogInterface dialog, final int which,
 						final boolean isChecked) {
 					Log.d("test", "which = " + which);
 
+					Log.d("tag", "get at least here 10");
 					if (isChecked) {
 						if ((peoplePicker_mselected != -1)
 								&& (peoplePicker_mselected != which)) {
@@ -196,7 +203,10 @@ public class InviterActivity extends Activity implements OnClickListener {
 						peoplePicker_mselected = -1;
 				}
 			};
-			 build_alertDialog.setMultiChoiceItems(array_nameString, null, onClick);
+			
+			Log.d("tag", "get at least here 11");
+			build_alertDialog.setMultiChoiceItems(array_nameString, null, onClick);
+			
 			build_alertDialog.setPositiveButton("Done",
 					new DialogInterface.OnClickListener() {
 						public void onClick(final DialogInterface dialog, final int which) {
@@ -210,7 +220,11 @@ public class InviterActivity extends Activity implements OnClickListener {
 										.show();
 						}
 					});
+		
+
 			build_alertDialog.show();
+
+			
 		}
 	}
 
@@ -227,14 +241,14 @@ public class InviterActivity extends Activity implements OnClickListener {
 	/**
 	 * Name: getNameContact Function: retrieve names from the contact list
 	 */
-	// @SuppressLint({ "ParserError", "ParserError" })
-	// @SuppressLint("ParserError")
 
 	private ArrayList<String> getNameContact() {
 		ContentResolver cr = getContentResolver();
+		Log.d("tag", "get at least here 1");
 		Cursor cur_findName = cr.query(ContactsContract.Contacts.CONTENT_URI, null,
 				null, null, null);
 
+		Log.d("tag", "get at least here 2");
 		String tempId;
 		String mDecider = Integer
 				.toString(ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE);
@@ -242,13 +256,20 @@ public class InviterActivity extends Activity implements OnClickListener {
 
 		if (cur_findName.getCount() > 0) {
 			// int cnt = 1;
+			
 			while (cur_findName.moveToNext()) {
 				tempId = cur_findName.getString(cur_findName
 						.getColumnIndex(ContactsContract.Contacts._ID));
 				if (Integer.parseInt(cur_findName.getString(cur_findName
 						.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) != 0) {
+					
 					aList_name.add(cur_findName.getString(cur_findName
 							.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)));
+					
+					Log.d("tag", "DISPLAY_NAME : " + cur_findName.getString(cur_findName
+							.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)));
+					
+		//			Log.d("tag", "Test" +)
 
 					Cursor cur_findMobile = cr.query(
 							ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
